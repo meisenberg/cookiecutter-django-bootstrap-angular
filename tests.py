@@ -40,7 +40,7 @@ class TestTemplate(unittest.TestCase):
                             filename + ' not generated')
 
         ret = subprocess.call(
-            'bin/django-manage syncdb --noinput --migrate',
+            'bin/django-manage syncdb --noinput',
             shell=True)
         self.assertEqual(ret, 0)
 

@@ -11,7 +11,6 @@ install_requires = [
     'DjangoDevKit',
     'django-registration-redux',
     'django-autoslug',
-    'south',
     'django-bootstrap3',
 ]
 
