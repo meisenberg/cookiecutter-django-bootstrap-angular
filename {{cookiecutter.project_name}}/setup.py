@@ -9,7 +9,7 @@ install_requires = [
     'Sphinx',
     'Django>=1.6',
     'DjangoDevKit',
-    'django-registration',
+    'django-registration-redux',
     'django-autoslug',
     'south',
     'django-bootstrap3',
