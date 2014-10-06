@@ -47,7 +47,7 @@ class TestTemplate(unittest.TestCase):
         tox = os.path.join(self.cwd, 'bin', 'tox')
         if not os.path.isfile(tox):
             tox = 'tox'
-        ret = subprocess.call(tox, shell=True)
+        ret = subprocess.call(tox + ' tests', shell=True)
         self.assertEqual(ret, 0)
 
         ret = subprocess.call('bin/gulp test', shell=True)
