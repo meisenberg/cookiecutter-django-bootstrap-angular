@@ -162,7 +162,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
 
-    'south',
     'registration',
     'autoslug',
     'bootstrap3',
