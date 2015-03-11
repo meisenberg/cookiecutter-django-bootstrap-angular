@@ -18,6 +18,8 @@ test_requires = [
     'django-webtest',
     'coverage',
     'flake8',
+    'pytest-django',
+    'pytest',
 ]
 
 
