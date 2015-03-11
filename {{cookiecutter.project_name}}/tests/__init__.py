@@ -3,5 +3,5 @@ import os
 
 os.environ['DJANGO_SETTINGS_MODULE'] = '{{cookiecutter.project_name}}.settings'
 
-import django
+import django  # NOQA
 django.setup()

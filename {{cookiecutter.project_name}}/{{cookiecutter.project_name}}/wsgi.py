@@ -1,3 +1,6 @@
+import os
+from os.path import abspath, dirname
+from sys import path
 """
 WSGI config for {{ project_name }} project.
 
@@ -13,9 +16,6 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import os
-from os.path import abspath, dirname
-from sys import path
 
 SITE_ROOT = dirname(dirname(abspath(__file__)))
 path.append(SITE_ROOT)
@@ -25,5 +25,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE",
                       "{{cookiecutter.project_name}}.settings")
 
 
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application  # NOQA
 application = get_wsgi_application()
