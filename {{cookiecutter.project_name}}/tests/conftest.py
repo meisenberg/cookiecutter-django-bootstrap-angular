@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
-import os
 import pytest
-import django
 import django_webtest
-from django.test import utils
-os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
 from django.contrib.auth.models import User
 
 """
 Contains py.test fixtures
 """
 
-django.setup()
 wtm = django_webtest.WebTestMixin()
 
 
