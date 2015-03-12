@@ -6,4 +6,4 @@ install:
   - pip install flake8
   - pip install tox
 script:
-  - nosetests -s -v
+  - python tests.py

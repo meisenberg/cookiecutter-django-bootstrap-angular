@@ -55,3 +55,6 @@ class TestTemplate(unittest.TestCase):
 
         ret = subprocess.call('flake8', shell=True)
         self.assertEqual(ret, 0)
+
+if __name__ == '__main__':
+    unittest.main()
