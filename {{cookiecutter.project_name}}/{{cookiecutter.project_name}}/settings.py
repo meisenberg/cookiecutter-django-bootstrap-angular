@@ -149,7 +149,7 @@ ROOT_URLCONF = '{{ cookiecutter.project_name }}.urls'
 WSGI_APPLICATION = '{{ cookiecutter.project_name }}.wsgi.application'
 
 TEMPLATE_DIRS = (
-    path.realpath(path.join(PROJECT_DIR, '..', 'templates')),
+    path.realpath(path.join(PROJECT_DIR, 'templates')),
 )
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
