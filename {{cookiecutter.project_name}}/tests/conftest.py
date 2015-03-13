@@ -62,6 +62,9 @@ class Server(threading.Thread):
             self.app, loop=self.loop, port=self.port)
         server.run()
 
+    def stop(self):
+        self.loop.stop()
+
 
 @pytest.fixture(scope='function')
 def browser(request, app):
@@ -85,7 +88,7 @@ def browser(request, app):
     browser = Browser(executable_path=p)
     browser.url = server.url
     request.addfinalizer(browser.quit)
-    request.addfinalizer(server.loop.stop)
+    request.addfinalizer(server.stop)
     return browser
 
 
