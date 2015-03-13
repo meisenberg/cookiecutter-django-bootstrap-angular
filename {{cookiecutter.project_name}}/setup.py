@@ -15,6 +15,7 @@ install_requires = [
 ]
 
 test_requires = [
+    'webdriverwrapper',
     'django-webtest',
     'coverage',
     'flake8',

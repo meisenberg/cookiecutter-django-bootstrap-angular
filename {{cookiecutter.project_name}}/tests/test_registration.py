@@ -29,3 +29,8 @@ def test_register(app, mails):
     form['password'] = 'passwd'
     resp = form.submit().follow()
     resp.mustcontain('Log out')
+
+
+def test_browser_login(browser, admin):
+    browser.login(admin.username)
+    browser.mustcontain(admin.username)

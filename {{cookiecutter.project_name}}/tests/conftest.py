@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pytest
+from os import path
 from functools import partial
+import webdriverwrapper
 import django_webtest
 from django.contrib.auth.models import User
 from django.core import mail
@@ -8,6 +10,28 @@ from django.core import mail
 """
 Contains py.test fixtures
 """
+
+
+class Browser(webdriverwrapper.PhantomJS):
+    pass
+
+    def get(self, path):
+        return super(Browser, self).get(self.url + path)
+
+    def login(self, username, password='password'):
+        self.get('/accounts/login/')
+        self.get_elm('login').fill_out_and_submit({
+            'username': username,
+            'password': password,
+        })
+        self.mustcontain(username)
+
+    def mustcontain(self, *texts):
+        for text in texts:
+            if text not in self.page_source:
+                print(self.page_source)
+            assert text in self.page_source
+
 
 wtm = django_webtest.WebTestMixin()
 
@@ -21,6 +45,19 @@ def app(request, db):
 
 
 @pytest.fixture(scope='function')
+def browser(request, live_server):
+    p = path.join(
+        path.dirname(path.dirname(__file__)),
+        'node_modules/karma-phantomjs-launcher/'
+        'node_modules/phantomjs/bin/phantomjs'
+    )
+    browser = Browser(executable_path=p)
+    browser.url = live_server.url
+    request.addfinalizer(browser.quit)
+    return browser
+
+
+@pytest.fixture(scope='function')
 def mails(request):
     mail.outbox = []
     request.addfinalizer(partial(setattr, mail, 'outbox', []))
@@ -28,7 +65,7 @@ def mails(request):
 
 
 @pytest.fixture(scope='function')
-def admin(request, app):
+def admin(db, request):
     user = User.objects.create_user(username='cnorris',
                                     email='chuck@norris.com',
                                     password='passwd')
