@@ -19,6 +19,7 @@ test_requires = [
     'coverage',
     'flake8',
     'pytest-django',
+    'pytest-cov',
     'pytest',
 ]
 

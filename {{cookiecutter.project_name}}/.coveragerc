@@ -1,10 +1,10 @@
 [run]
 include =
-    */{{cookiecutter.project_name}}/*.py
-    */{{cookiecutter.project_name}}/*/*.py
+    */{{cookiecutter.project_name}}/*
 
 omit =
-    bootstrap.py
+    */bootstrap.py
+    */wsgi.py
     */docs*
     */tests*
     */examples*
