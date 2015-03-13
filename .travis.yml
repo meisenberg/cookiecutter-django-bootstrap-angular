@@ -6,4 +6,4 @@ install:
   - pip install tox
 script:
   - cookiecutter -v --no-input $PWD
-  - cd project_name && tox
+  - cd project_name && rm .installed.cfg && tox
