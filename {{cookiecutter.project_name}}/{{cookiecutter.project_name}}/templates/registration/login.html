@@ -5,7 +5,7 @@
 
 {% block content %}
 <h1>{{ title }}</h1>
-<form id="register" method="post" action=".">
+<form id="login" method="post" action=".">
   {% csrf_token %}
   {% bootstrap_form form %}
 

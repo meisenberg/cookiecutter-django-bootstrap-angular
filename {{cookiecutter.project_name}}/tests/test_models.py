@@ -2,4 +2,4 @@
 
 
 def test_admin(admin):
-    assert admin.username == 'cnoris'
+    assert admin.username == 'cnorris'

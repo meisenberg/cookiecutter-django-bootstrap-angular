@@ -82,7 +82,7 @@ gulp.task('karma:watch', function () {
       configFile: 'karma.conf.js',
       action: 'watch'
     }))
-    .on('error', function(e) {throw e});
+    .on('error', function(e) {throw e;});
 });
 
 // Concatenations
@@ -92,8 +92,7 @@ gulp.task('concat', ['concatjs:app', 'concatjs:vendor']);
 gulp.task('test', ['karma']);
 
 // Serve django project
-var port = args.port || '8000';
-gulp.task("server", bg("bin/django-manage", "runserver", "0.0.0.0:"+port));
+gulp.task("server", bg("bin/django-serve"));
 
 // Watch Files For Changes
 gulp.task('watch', function() {
