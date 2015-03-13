@@ -13,7 +13,6 @@ Contains py.test fixtures
 
 
 class Browser(webdriverwrapper.PhantomJS):
-    pass
 
     def get(self, path):
         return super(Browser, self).get(self.url + path)
