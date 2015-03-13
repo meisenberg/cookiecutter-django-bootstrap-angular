@@ -17,3 +17,5 @@ if not os.path.isfile('.installed.cfg'):
     run('%s bootstrap.py' % sys.executable)
     print('running bin/buildout...')
     run('bin/buildout buildout:parts+=test')
+    print('running bin/gulp concat...')
+    run('bin/gulp contat')

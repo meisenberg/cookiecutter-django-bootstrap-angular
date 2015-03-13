@@ -2,9 +2,8 @@ language: python
 python:
   - 2.7
 install:
-  - sudo apt-get remove phantomjs
   - pip install cookiecutter
   - pip install tox
 script:
   - cookiecutter -v --no-input $PWD
-  - cd project_name && rm .installed.cfg && tox
+  - cd project_name && tox
