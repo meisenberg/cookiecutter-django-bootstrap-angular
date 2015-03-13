@@ -22,6 +22,7 @@ test_requires = [
     'pytest-django',
     'pytest-cov',
     'pytest',
+    'aiowsgi',
 ]
 
 

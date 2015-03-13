@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import pytest
+import threading
+import aiowsgi
 from os import path
 from functools import partial
 import webdriverwrapper
 import django_webtest
 from django.contrib.auth.models import User
 from django.core import mail
+from webtest.http import get_free_port
 
 """
 Contains py.test fixtures
@@ -44,8 +47,26 @@ def app(request, db):
     return wtm.app
 
 
+class Server(threading.Thread):
+
+    def __init__(self, app):
+        super(Server, self).__init__()
+        self.app = app
+        _, self.port = get_free_port()
+        self.url = 'http://127.0.0.1:%s' % self.port
+        self.loop = aiowsgi.asyncio.new_event_loop()
+
+    def run(self):
+        aiowsgi.asyncio.set_event_loop(self.loop)
+        server = aiowsgi.create_server(
+            self.app, loop=self.loop, port=self.port)
+        server.run()
+
+
 @pytest.fixture(scope='function')
-def browser(request, live_server):
+def browser(request, app):
+    server = Server(app.app)
+    server.start()
     # travis
     paths = (
         path.join(
@@ -62,8 +83,9 @@ def browser(request, live_server):
     if not path.isfile(p):
         raise OSError('Not able to find phantomjs binary')
     browser = Browser(executable_path=p)
-    browser.url = live_server.url
+    browser.url = server.url
     request.addfinalizer(browser.quit)
+    request.addfinalizer(server.loop.stop)
     return browser
 
 
