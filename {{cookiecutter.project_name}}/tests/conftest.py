@@ -20,7 +20,8 @@ class Browser(webdriverwrapper.PhantomJS):
 
     def login(self, username, password='password'):
         self.get('/accounts/login/')
-        self.get_elm('login').fill_out_and_submit({
+        form = self.wait_for_element(timeout=2, id_='login')
+        form.fill_out_and_submit({
             'username': username,
             'password': password,
         })
@@ -46,11 +47,21 @@ def app(request, db):
 
 @pytest.fixture(scope='function')
 def browser(request, live_server):
-    p = path.join(
-        path.dirname(path.dirname(__file__)),
-        'node_modules/karma-phantomjs-launcher/'
-        'node_modules/phantomjs/bin/phantomjs'
+    # travis
+    paths = (
+        path.join(
+            path.dirname(path.dirname(__file__)),
+            'node_modules/karma-phantomjs-launcher/'
+            'node_modules/phantomjs/bin/phantomjs'
+        ),
+        '/usr/local/phantomjs/bin/phantomjs',
+        '/usr/bin/phantomjs',
     )
+    for p in paths:
+        if path.isfile(p):
+            break
+    if not path.isfile(p):
+        raise OSError('Not able to find phantomjs binary')
     browser = Browser(executable_path=p)
     browser.url = live_server.url
     request.addfinalizer(browser.quit)
