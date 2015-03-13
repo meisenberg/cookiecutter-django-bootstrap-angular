@@ -17,7 +17,7 @@ if not os.path.isfile('.installed.cfg'):
         print('bootstraping project using %s...' % sys.executable)
         run('%s bootstrap.py' % sys.executable)
         print('running bin/buildout...')
-        run('bin/buildout')
+        run('bin/buildout buildout:parts+=test')
     else:
         print('running buildout...')
-        run('buildout')
+        run('buildout buildout:parts+=test')
