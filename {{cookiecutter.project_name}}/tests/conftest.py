@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import pytest
-import threading
-import aiowsgi
+import aiowsgi.thread
 from os import path
 from functools import partial
 import webdriverwrapper
 import django_webtest
 from django.contrib.auth.models import User
 from django.core import mail
-from webtest.http import get_free_port
 
 """
 Contains py.test fixtures
@@ -47,28 +45,9 @@ def app(request, db):
     return wtm.app
 
 
-class Server(threading.Thread):
-
-    def __init__(self, app):
-        super(Server, self).__init__()
-        self.app = app
-        _, self.port = get_free_port()
-        self.url = 'http://127.0.0.1:%s' % self.port
-        self.loop = aiowsgi.asyncio.new_event_loop()
-
-    def run(self):
-        aiowsgi.asyncio.set_event_loop(self.loop)
-        server = aiowsgi.create_server(
-            self.app, loop=self.loop, port=self.port)
-        server.run()
-
-    def stop(self):
-        self.loop.stop()
-
-
 @pytest.fixture(scope='function')
 def browser(request, app):
-    server = Server(app.app)
+    server = aiowsgi.thread.WSGIServer(app.app)
     server.start()
     # travis
     paths = (
