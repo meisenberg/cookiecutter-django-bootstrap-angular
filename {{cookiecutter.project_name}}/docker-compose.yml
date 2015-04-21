@@ -6,5 +6,6 @@ web:
     volumes:
         - .:/var/www/{{cookiecutter.project_name}}
         - ~/eggs:/var/www/{{cookiecutter.project_name}}/eggs
+        - /var/www/{{cookiecutter.project_name}}/.tox
     command: bash docker/run.sh django-serve
     env_file: docker/web.env
