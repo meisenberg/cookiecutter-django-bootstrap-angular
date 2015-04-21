@@ -37,6 +37,10 @@ Just run::
 
     $ docker-compose run --service-ports web
 
+Or::
+
+    $ docker-compose run --service-ports web gulp watch server
+
 Building a docker image
 =======================
 
