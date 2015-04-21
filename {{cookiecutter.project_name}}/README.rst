@@ -28,11 +28,18 @@ Or with gulp if you working on css/javascript resources::
 
     $ bin/gulp watch server
 
-Using docker-compose
-====================
+Using docker-compose for development
+====================================
 
 You'll need to install https://docs.docker.com/compose/
 
 Just run::
 
     $ docker-compose run --service-ports web
+
+Building a docker image
+=======================
+
+Just run::
+
+   $ docker build -t {{cookiecutter.project_name}} .
