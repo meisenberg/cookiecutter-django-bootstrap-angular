@@ -5,7 +5,7 @@ template:
 	$(DIRNAME)/bin/cookiecutter -v --no-input $(DIRNAME)
 
 run: template
-	cd project_name; docker-compose run web
+	cd project_name; docker-compose run --service-ports web
 
 rtest: template
 	cd project_name; docker-compose run web tox
