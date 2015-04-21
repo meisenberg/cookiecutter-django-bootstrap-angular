@@ -27,3 +27,12 @@ You can launch a dev server using::
 Or with gulp if you working on css/javascript resources::
 
     $ bin/gulp watch server
+
+Using docker-compose
+====================
+
+You'll need to install https://docs.docker.com/compose/
+
+Just run::
+
+    $ docker-compose run --service-ports web

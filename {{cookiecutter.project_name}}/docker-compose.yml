@@ -1,0 +1,10 @@
+web:
+    image: python:2.7.9
+    ports:
+        - "127.0.0.1:8000:8000"
+    working_dir: /var/www/{{cookiecutter.project_name}}
+    volumes:
+        - .:/var/www/{{cookiecutter.project_name}}
+        - ~/eggs:/var/www/{{cookiecutter.project_name}}/eggs
+    command: bash docker/run.sh django-serve
+    env_file: docker/web.env

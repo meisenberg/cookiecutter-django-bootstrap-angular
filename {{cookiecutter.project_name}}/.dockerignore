@@ -1,0 +1,17 @@
+*.pyc
+*.nja
+*.pyo
+*~
+db.dat
+*.swp
+pip-*.gz
+eggs
+.project
+.pydevproject
+*.egg-info/
+develop-eggs/
+bin/
+src/
+static/
+.tox/
+.installed.cfg

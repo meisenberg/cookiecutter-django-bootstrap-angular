@@ -1,22 +1,10 @@
 #!/bin/bash
-IMAGE=python:2.7.9
+set -e
 
-if [ "$(whoami)" != "root" ]; then
-    echo "Running docker..."
-	docker run -it \
-       -p 127.0.0.1:8000:8000 \
-       -v $PWD:/var/www/app \
-       -v $HOME/eggs:/var/www/app/eggs \
-       $IMAGE \
-       sh /var/www/app/docker/run.sh $@
-    exit $?
-fi;
-
-cd /var/www/app
-if ! grep /var/www/app bin/buildout > /dev/null; then
+if ! grep $(which python) $BUILDOUT > /dev/null; then
     echo "Building app..."
     python bootstrap.py
-    python ./bin/buildout buildout:parts+=test
+    python $BUILDOUT $BUILDOUT_OPTIONS
 fi
 
 if ! [ -f db.dat ]; then
@@ -25,10 +13,10 @@ if ! [ -f db.dat ]; then
     bin/django-manage createsuperuser --noinput --username admin --email admin@example.com 2>/dev/null|| true
 fi
 
-! [ -d /var/www/app/static ] && bin/django-manage collectstatic --noinput
+if ! [ -d $APP/static ]; then
+   bin/gulp concat
+   bin/django-manage collectstatic --noinput
+fi
 
-export PATH=$PATH:$PWD/bin
-
-echo "$@"
 exec $@
 
