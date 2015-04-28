@@ -203,3 +203,6 @@ LOGGING = {
         },
     }
 }
+
+if 'DB_PORT' in os.environ:
+    from .docker_settings import *  # NOQA

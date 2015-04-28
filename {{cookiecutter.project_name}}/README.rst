@@ -33,13 +33,22 @@ Using docker-compose for development
 
 You'll need to install https://docs.docker.com/compose/
 
-Just run::
+Using mysql::
 
+    $ docker-compose up mysql
     $ docker-compose run --service-ports web
 
-Or::
+With sqlite::
+
+    $ docker-compose run --service-ports --no-deps web
+
+You can also launch a specific command::
 
     $ docker-compose run --service-ports web gulp watch server
+
+Running tests::
+
+    $ docker-compose run --service-ports web tox
 
 Building a docker image
 =======================

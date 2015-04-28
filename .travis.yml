@@ -1,9 +1,11 @@
 language: python
-python:
-  - 2.7
 install:
-  - pip install cookiecutter
-  - pip install tox
+  - pip install cookiecutter tox
 script:
   - cookiecutter -v --no-input $PWD
   - cd project_name && tox
+env:
+  - TOXENV=py27
+  - TOXENV=py34
+  - TOXENV=js
+  - TOXENV=flake8

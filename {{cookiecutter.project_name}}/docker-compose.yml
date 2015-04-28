@@ -1,11 +1,22 @@
+db:
+    image: mysql:5.5
+    env_file: docker/mysql.env
+    volumes:
+        - var/lib/mysql:/var/lib/mysql
+
 web:
-    image: python:2.7.9
+    image: python:3.4.2
+    tty: true
+    stdin_open: true
     ports:
         - "127.0.0.1:8000:8000"
     working_dir: /var/www/{{cookiecutter.project_name}}
+    links:
+        - db
     volumes:
         - .:/var/www/{{cookiecutter.project_name}}
         - ~/eggs:/var/www/{{cookiecutter.project_name}}/eggs
         - /var/www/{{cookiecutter.project_name}}/.tox
-    command: bash docker/run.sh django-serve
+    command: docker/run.sh django-serve
     env_file: docker/web.env
+
