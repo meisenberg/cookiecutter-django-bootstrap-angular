@@ -13,6 +13,9 @@ eggs
 parts/
 develop-eggs/
 node_modules/
+bower_components/
+static/
 bin/
 src/
 .installed.cfg
+!{{cookiecutter.project_name}}/static/
