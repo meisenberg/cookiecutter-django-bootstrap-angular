@@ -3,6 +3,7 @@ set -e
 
 if ! [ -z $DB_PORT ]; then
     BUILDOUT_OPTIONS="$BUILDOUT_OPTIONS eggs:eggs+=mysqlclient"
+    BUILDOUT_OPTIONS="$BUILDOUT_OPTIONS test:eggs+=mysqlclient"
 fi
 
 if ! grep $(which python) $BUILDOUT > /dev/null; then

@@ -2,7 +2,7 @@
 *.nja
 *.pyo
 *~
-db.dat
+*.db
 *.swp
 pip-*.gz
 vtenv
@@ -11,6 +11,7 @@ eggs
 .pydevproject
 *.egg-info/
 parts/
+medias/
 develop-eggs/
 node_modules/
 bower_components/
