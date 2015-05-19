@@ -97,9 +97,8 @@ gulp.task("server", bg("bin/django-serve"));
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('{{cookiecutter.project_name}}/static/css/*.less', ['less']);
-    gulp.watch(testFiles, ['test']);
     gulp.watch(appFiles, ['concatjs:app']);
 });
 
 // Default Task
-gulp.task('default', ['less', 'test', 'concat']);
+gulp.task('default', ['watch', 'server']);
