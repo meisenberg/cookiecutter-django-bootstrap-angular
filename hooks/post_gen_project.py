@@ -19,3 +19,5 @@ if not os.path.isfile('.installed.cfg'):
     run('bin/buildout buildout:parts+=test')
     print('running bin/gulp concat...')
     run('bin/gulp concat')
+    print('running bin/gulp less...')
+    run('bin/gulp less')
